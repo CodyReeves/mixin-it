@@ -1,0 +1,53 @@
+
+// Typography
+// ==========================================================================
+
+/// @name Convert to Rem
+/// @param {string} $size
+/// @returns {value} Value in using rem units
+
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return strip-unit($remSize) * 1rem;
+}
+
+/// @name Convert to Px
+/// @param {string} $size
+/// @returns {value} Value in using px units
+
+@function calculatePx($size) {
+  $pxSize: $size * $base-font-size;
+  @return $pxSize;
+}
+
+/// @name Convert to Em
+/// @param {string} $size
+/// @returns {value} Value in using em units
+
+@function calculateEm($size) {
+  $emSize: $size / 16px;
+  @return strip-unit($emSize) * 1em;
+}
+
+/// @name Font Size
+/// Default mixins to handle fallback or static font sizes
+/// @param {string} $size - size with px unit
+/// @outputs font size in rem.
+
+@mixin font-size($size) {
+  // sass-lint:disable-block no-duplicate-properties
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+/// @name Line Height
+/// Default mixins to handle fallback or static line-height
+/// @param {value} $heightValue
+/// @outputs line-height properties
+
+@mixin line-height($heightValue: 12) {
+  line-height: $heightValue + px;
+
+  // Fallback for old browsers
+  line-height: 0.125 * $heightValue + rem; // sass-lint:disable-line no-duplicate-properties
+}

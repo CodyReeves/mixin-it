@@ -1,0 +1,15 @@
+@import 'animate';
+@import 'colors';
+@import 'fontawesome';
+@import 'normalize';
+@import 'shadows';
+@import 'utilities';
+@import 'typography';
+@import 'infra';
+@import 'keyframe-library/keyframe-library';
+
+$keyframes: (keyframes: map-collect($keyframes-attention-seekers, $keyframes-bouncing-entrances, $keyframes-bouncing-exits, $keyframes-fading-entrances, $keyframes-fading-exits, $keyframes-flippers, $keyframes-lightspeed, $keyframes-rotating-entrances, $keyframes-rotating-exits, $keyframes-sliding-entrances, $keyframes-sliding-exits, $keyframes-specials, $keyframes-zooming-entrances, $keyframes-zooming-exits));
+
+$settings: () !default;
+
+$settings: map-collect($settings, $grid, $colors, $normalize, $shadow, $utilities, $typography, $infra, $animate, $keyframes) !global;

@@ -1,0 +1,130 @@
+/// @name Keyframe Creator
+/// @param {key} $key - A key
+/// @param {map} $map [$keyframe-global] - A map of keyframe properties
+/// @outputs keyframe with all browser prefix
+
+@mixin create-keyframe($key, $map: $keyframe-global) {
+  $keyframe-properties: ();
+
+  // Get keys for map
+  $all-keys: map-keys($map);
+
+  // Check the current key with map and gets its contents
+  @if index($all-keys, $key) {
+    $keyframe-properties: map-get($map, $key);
+    // Remove dependancy since its unneeded for keyframe
+    $keyframe-properties: map-remove($keyframe-properties, dependancy);
+  } @else {
+    @error '#{$key} is not a current keyframe';
+  }
+
+  // Creates keyframe
+  @include keyframes($key) {
+    // Loops throgh the properties, creating each step in the keyframe
+    @each $key, $value in $keyframe-properties {
+      #{$key} {
+        @each $property, $attr in $value {
+
+          $transform-check: starts-with($property, 'transform');
+          $animation-check: starts-with($property, 'animation');
+          // Checks to see if animation or transform is being used
+          @if $transform-check == true or $animation-check == true {
+            @include prefix($property, $attr);
+          } @else {
+            // Produces regular property
+            #{$property}: $attr;
+          }
+        }
+      }
+    }
+  }
+}
+
+/// @name Create's animations for elements
+/// NOTE:: Do not nest this mixin within elements if you are importing keyframe
+/// @param {string} $class-name - Name of class to be associated with animation
+/// @param {key} $animation - Name of animation to call
+/// @param {boolean} $import-keyframe [false] - true or false to import the keyfrmae associated with the animation name
+/// @param {string | value} $count [$animate-count-default] - iterations of the animation
+/// @param {string | value} $duration [$animate-duration-default] - duration of the animation
+/// @param {string | value} $delay [$animate-delay-default] - delay of the animation
+/// @param {string | value} $function [$animate-function-default] - function timing of the animation
+/// @param {string | value} $fill [$animate-fill-default] - fill mode of the animation
+/// @param {string | value} $visibility [$animate-visibility-default] - visibility of the animation initially -> set to fasle to not compile property
+/// @param {string | value} $play-state [$animate-play-state-default] - play-state of the animation
+/// @param {string | value} $direction [$animate-direction-default] - direction of the animation
+/// @param {map} $map [$keyframe-global] - A map containing all keyframes and the properties
+/// @outputs animation nested within a class with the associated keyframe
+/// @example
+///      @include animate(pulse-animation, pulse, true);
+///
+///      @include animate((
+///        class-name: pulse-animation,
+///        animation: pulse,
+///        import-keyframe: false,
+///        fill: forwards
+///       )...);
+///
+
+@mixin animate($class-name, $animation: null, $import-keyframe: false, $count: $animate-count-default, $duration: $animate-duration-default, $delay: $animate-delay-default, $function: $animate-function-default, $fill: $animate-fill-default, $visibility: $animate-visibility-default, $direction: $animate-direction-default, $play-state: $animate-play-state-default, $map: $keyframes) {
+
+  // Helper that list all animations and mixin arguments
+  @if $class-name == help {
+    $helper-animations: map-keys($map);
+    @include INFO('Available Animations: #{$helper-animations} \A Available Arguments: class-name, animation, import-keyframe, count, duration, delay, function, fill, visibility, direction, play-state');
+  }
+
+  .#{$class-name} {
+    $dependency-properties: ();
+    $properties: map-get($map, $animation);
+
+    @if map-has-key($properties, dependancy) {
+      $dependency-properties: map-get($properties, dependancy);
+
+      @each $property, $attr in $dependency-properties {
+        // If the key matches a mixin the property is prefixed
+        @if mixin-exists($property) {
+          @include prefix($property, $attr);
+        } @else {
+          // Produces regular property
+          #{$property}: $attr;
+        }
+      }
+    }
+    // Creates animation, doing short hand to generate less properties
+    @include animation($duration $function $delay $count $direction $fill $play-state $animation);
+
+    // If set to false visibility wont compile in
+    @if $visibility != false {
+      @include visibility($visibility);
+    }
+    // Checks to see if you want the keyframe imported
+    @if $import-keyframe == true {
+      @at-root {
+        @include create-keyframe($animation);
+      }
+    }
+  }
+}
+
+/// @name Keyframe/Animation Class Creator
+/// @param {boolean} $keyframes [false] - True or false to create keyframes
+/// @param {boolean} $animation [false] - True or false to create keyframes and animation classes
+/// @outputs keyframes and or the classes
+
+@mixin create-keyframe-animate-class($keyframes: false, $animation: false, $animate-map: $keyframe-global) {
+  $gen-keys: map-keys($animate-map);
+
+  @if $keyframes != false or $animation != false {
+    @each $key in $gen-keys {
+      @include create-keyframe($key);
+    }
+  }
+
+  @if $animation != false {
+    @each $key in $gen-keys {
+      $class-name: $key + '-animate';
+      @include animate($class-name, $key);
+    }
+  }
+}

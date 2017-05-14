@@ -1,0 +1,176 @@
+
+// Data Calls
+// ===============================================================
+
+/// @name Mutiple value return
+/// Currently only surpport 4 levels of depth
+/// @param {key} $keys - A lits of keys to search through
+/// @param {map} $map [$user-selected-database] - A list of keys to grab values for
+/// @param {bool} $return [null] - if single value searching return in map if set to map
+/// @return {map | value} value or map of values that were called
+
+@function get-mutiple($keys, $map: null, $return: null) {
+  $count: 1;
+  $length: length($keys);
+  $merge: ();
+  $return-value: ();
+
+  @if $map == null {
+    $map: $settings;
+  }
+
+  @if length($keys) >= 2 or $return == map {
+    @while $count <= $length {
+      $key: nth($keys, $count);
+      $get-value: map-get($map, $key);
+      $merge: map-merge($merge, ($key: $get-value));
+      $count: $count + 1;
+    }
+    $return-value: $merge;
+  } @else {
+    $return-value: map-get($map, $keys);
+  }
+  @return $return-value;
+}
+
+/// @name Heading Call
+/// Grabs a single value or a map from headings
+/// @param {key} $type - What type of heading
+/// @param {list} $attrs - A list of keys to grab values for
+/// @param {bool} $return [null] - The override map
+/// @return {map} with set values from override
+
+@function heading($type, $attrs, $return: null) {
+  $font-map: ();
+  $map: get('typography, heading');
+  $font-map: map-get($map, $type);
+  @return get-mutiple($attrs, $font-map, $return);
+}
+
+/// @name Font Family Call
+/// @param {key} $key - key of what family to call
+/// @return {string} of font family
+
+@function font-family($key) {
+  $return-value: get('typography, fonts, #{$key}');
+  @return unquote($return-value);
+}
+
+/// @name Font Plugin Call
+/// @param {key} $plugin - what font plugin to call
+/// @param {key} $key - key to call from plugin map
+/// @return {value} value of key
+
+@function font-plugin($plugin, $key) {
+  $return-value: get('typography, plugin, #{$plugin}, #{$key}');
+  @return $return-value;
+}
+
+/// @name Color Call
+/// @param {map} $global - The preset map
+/// @param {map} $override - The override map
+/// @return {map} with set values from override
+
+@function color($type, $key) {
+  $return-value: get('colors, #{$type}, #{$key}');
+  @return $return-value;
+}
+
+/// @name Color Call Extra
+/// Can add darken or ligthen as first key in list to add to color function default 15% each way.
+/// @param {map} $global - The preset map
+/// @param {map} $override - The override map
+/// @return {map} with set values from override
+
+@function color-call-extra($color-list) {
+  $return-value: ();
+  // If both exist error
+  @if index($color-list, darken) and index($color-list, lighten) {
+    @error 'Oops! cant create color, darken and ligten both were called.';
+  }
+
+  @if index($color-list, darken) or index($color-list, lighten) {
+    @if index($color-list, darken) {
+      $return-value: darken(color(nth($color-list, 2), nth($color-list, 3)), 15%);
+    }
+    @if index($color-list, lighten) {
+      $return-value: lighten(color(nth($color-list, 2), nth($color-list, 3)), 15%);
+    }
+  } @else {
+    $return-value: color(nth($color-list, 1), nth($color-list, 2));
+  }
+  @return $return-value;
+}
+
+/// @name Active Plugin Check
+/// @param {key} $plugin - A plugin to check if set to active true
+/// @return {map} with set values from override
+
+@function plugin-active($plugin) {
+  $return-value: get('plugins, #{$plugin}, active');
+  @return $return-value;
+}
+
+/// @name Active Template Check
+/// @param {key} $type - what type of template
+/// @param {key} $piece - key to call from type
+/// @return {value} a value recieved from key
+
+@function template-active($type, $piece) {
+  $return-value: get('template, #{$type}, #{$piece}, active');
+
+  @return $return-value;
+}
+
+/// @name Get value from infra
+/// @param {key} $key - A key to return form infra map
+/// @return {value} of key called
+
+@function infra-value($key) {
+  $return-value: get('infra, #{$key}');
+
+  @return $return-value;
+}
+
+/// @name Get Normalize Value
+/// @param {key} $key - A key to check if set to active true
+/// @return {map} with set values from override
+
+@function normalize-get-value($key) {
+  $return-value: get('normalize, #{$key}');
+
+  @return $return-value;
+}
+
+/// @name Returns a breakpoint value form key
+/// @param {key} $key - key of breakpoint
+/// @return {value} returns value of breakpoint in px
+
+@function breakpoint-value($key) {
+  $str: 'grid, setup, breakpoints, #{$key}';
+  @return get($str);
+}
+
+/// @name Returns animate values
+/// @param {key} $key - key of animate
+/// @return {value} returns value of breakpoint in px
+
+@function animate-value($key) {
+  @return get('animate, #{$key}');
+}
+
+/// @name Keyframe active
+/// @param {key} $key - key of keyframe
+/// @return {bool} return trur or false
+
+@function keyframe-active($key) {
+  @return get('animate, import, #{$key}, active');
+}
+
+/// @name Keyframe animation list
+/// @param {key} $key - key of keyframe
+/// @return {list} list of animation names.
+
+@function keyframe-list($key) {
+  @return get('animate, import, #{$key}, animations');
+}

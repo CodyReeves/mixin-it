@@ -1,0 +1,30 @@
+$keyframes-lightspeed: (
+  lightSpeedIn: (
+    '0%': (
+      opacity: 0,
+      transform: 'translateX(100%) skewX(-30deg)'
+    ),
+    '60%': (
+      opacity: 1,
+      transform: 'translateX(-20%) skewX(30deg)'
+    ),
+    '80%': (
+      opacity: 1,
+      transform: 'translateX(0%) skewX(-15deg)'
+    ),
+    '100%': (
+      opacity: 1,
+      transform: 'translateX(0) skewX(0deg)'
+    )
+  ),
+  lightSpeedOut: (
+    '0%': (
+      opacity: 1,
+      transform: 'translateX(0%) skewX(0deg)'
+    ),
+    '100%': (
+      opacity: 0,
+      transform: 'translateX(100%) skewX(-30deg)'
+    )
+  )
+);

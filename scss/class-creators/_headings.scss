@@ -1,0 +1,84 @@
+/// @name Headings 
+/// Creates basic heading classes
+/// @outputs base haeding and pharagraph classes
+
+@mixin infra-headings() {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    clear: both;
+    font:  {
+      family: font-family(heading);
+    }
+  }
+
+  p {
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word; //non-standart css for webkit
+    // cleaning up the ragged lines and breaks
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+    font:  {
+      family: font-family(primary);
+    }
+    // sets a minimum number of characters before and after the break
+    -webkit-hyphenate-before: 2;
+    -webkit-hyphenate-after: 3;
+    hyphenate-lines: 3;
+    // enabling fancy ligatures when available
+    -webkit-font-feature-settings: 'liga', 'dlig';
+    -moz-font-feature-settings: 'liga=1, dlig=1';
+    -ms-font-feature-settings: 'liga', 'dlig';
+    -o-font-feature-settings: 'liga', 'dlig';
+    font-feature-settings: 'liga', 'dlig';
+  }
+
+  a {
+    display: inline-block;
+    text-decoration: get('typography, link, text-decoration');
+    text-transform: get('typography, link, text-transform');
+    color: color(link, link);
+
+    @include transition(0.3s ease all);
+
+    &:focus,
+    &:active,
+    &:hover {
+      color: darken(color(link, link), 20%);
+      outline: 0;
+    }
+  }
+
+  $heading: get('typography, heading');
+  $heading-keys: map-keys($heading);
+
+  // Loops through checking what type of heading you would like within your stylesheet -> using fluid-font or using static text headings
+
+  @each $key in $heading-keys {
+    $map: map-get($heading, $key);
+    $level: nth(nth($map, 1), 2);
+    $size-fallback: nth(nth($map, 2), 2);
+    $line-fallback: nth(nth($map, 3), 2);
+    $weight: nth(nth($map, 4), 2);
+    $transform: nth(nth($map, 5), 2);
+
+    #{$key},
+    .#{$key} {
+      font-weight: $weight;
+      @include font-size($size-fallback);
+      line-height: $line-fallback;
+      @if $transform != none {
+        text-transform: $transform;
+      }
+      @if $key == p {
+        margin-bottom: 1.5em;
+      }
+    }
+  }
+}

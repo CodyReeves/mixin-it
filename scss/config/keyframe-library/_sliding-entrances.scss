@@ -1,0 +1,42 @@
+$keyframes-sliding-entrances: (
+  slideInDown: (
+    '0%': (
+      opacity: 0,
+      transform: 'translateY(-2000px)'
+    ),
+    '100%': (
+      opacity: 1,
+      transform: 'translateY(0)'
+    )
+  ),
+  slideInLeft: (
+    '0%': (
+      opacity: 0,
+      transform: 'translateX(-2000px)'
+    ),
+    '100%': (
+      opacity: 1,
+      transform: 'translateX(0)'
+    )
+  ),
+  slideInRight: (
+    '0%': (
+      opacity: 0,
+      transform: 'translateX(2000px)'
+    ),
+    '100%': (
+      opacity: 1,
+      transform: 'translateX(0)'
+    )
+  ),
+  slideInUp: (
+    '0%': (
+      opacity: 0,
+      transform: 'translateY(2000px)'
+    ),
+    '100%': (
+      opacity: 1,
+      transform: 'translateY(0)'
+    )
+  )
+);

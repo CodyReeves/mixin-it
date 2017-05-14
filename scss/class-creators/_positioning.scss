@@ -1,0 +1,81 @@
+/// @name Positioning
+/// Creates basic position classes
+/// @outputs basic position classes
+
+@mixin infra-position() {
+  // Positioning
+  // ==========================================================================
+
+  // Clearfix
+  // ==================================
+
+  .clearfix {
+    &::before,
+    &::after {
+      display: table;
+      content: ' ';
+    }
+  }
+
+  .container {
+    &::before,
+    &::after {
+      display: table;
+      content: ' ';
+    }
+  }
+
+  .container-fluid {
+    &::before,
+    &::after {
+      display: table;
+      content: ' ';
+    }
+  }
+
+  .clearfix,
+  .container,
+  .container-fluid {
+    &::after {
+      clear: both;
+    }
+  }
+
+  .affix {
+    position: fixed;
+  }
+
+  .sr-only {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+  }
+
+  .sr-only-focusable {
+    &:active,
+    &:focus {
+      position: static;
+      overflow: visible;
+      clip: auto;
+      width: auto;
+      height: auto;
+      margin: 0;
+    }
+  }
+
+  // Floats
+  // ==================================
+
+  .pull-right {
+    float: right !important;
+  }
+
+  .pull-left {
+    float: left !important;
+  }
+}

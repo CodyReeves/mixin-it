@@ -1,0 +1,231 @@
+
+/// @name Validate Child Query
+/// Validates the query
+/// @param {map} $config - A map containing all required vars across all queries
+/// @param {map} $query - A map of what query is being called
+/// @return {boolean} true or false -> If a var is missing return false
+
+@function validate-child-query($config, $query) {
+  $return-value: ();
+  $count: 1;
+
+  // Gets required vars within list
+  $validate: map-get($query, required-vars);
+  $length-value: length($validate);
+
+  // Runs through each required var and ensure it has a value set
+  @while $count <= $length-value {
+    $required-key: nth($validate, $count);
+    @if map-has-key($config, $required-key) {
+      $check-null: map-get($config, $required-key);
+
+      @if $check-null == null or $check-null == '' or $check-null == 0 {
+        // Adds false to return and what var is not set
+        $return-value: false, $required-key;
+        // Ends count since return false
+        $count: $length-value + 1;
+      } @else {
+        // Return true -> required vars have a value set
+        $return-value: true;
+      }
+    } @else {
+      // Adds false to return and what var is not set
+      $return-value: false, $required-key;
+      // Ends count since return false
+      $count: $length-value + 1;
+    }
+    $count: $count + 1;
+  }
+  @return $return-value;
+}
+
+/// @name Child Mixin
+/// Creates child selectors
+///
+/// @param {string} $type - Always required specifies what type of child query to export
+/// @param {intiger} $number [0] - Initger that may be required
+/// @param {intiger} $first [0] - Initger that may be required
+/// @param {intiger} $last [0] - Initger that may be required
+/// @param {intiger} $limit [0] - Initger that may be required
+/// @param {intiger} $min [0] - Initger that may be required
+/// @param {intiger} $max [0] - Initger that may be required
+/// @content [Child Contents]
+/// @output list in a map format (sm: 40px, lg: 80px)
+// @example:
+//        @include child((
+//          type: in-between,
+//          min: 4,
+//          max: 10
+//          )...) {
+//            color: color(greyscale, white);
+//          }
+
+@mixin child($type, $number: 0, $first: 0, $last: 0, $limit: 0, $min: 0, $max: 0) {
+  // Sets selector
+  $selector: '&';
+
+  // Sets up basic vars within map to be called
+  $config-args: (
+    type: $type,
+    number: $number,
+    first: $first,
+    last: $last,
+    limit: $limit,
+    min: $min,
+    max: $max,
+  );
+
+  // Sets the strings and required vars fro each child query
+  $types: (
+    first: (
+      query-string: 'nth-child(-n + #{$number})',
+      required-vars: number,
+    ),
+    last: (
+      query-string: 'nth-last-child(-n + #{$number})',
+      required-vars: number
+    ),
+    after-first: (
+      query-string: 'nth-child(n + #{$number + 1})',
+      required-vars: number
+    ),
+    from-end: (
+      query-string: 'nth-last-child(#{$number})',
+      required-vars: number
+    ),
+    between: (
+      query-string: 'nth-child(n + #{$first}):nth-child(-n + #{$last})',
+      required-vars: first last
+    ),
+    even-between: (
+      query-string: 'nth-child(even):nth-child(n + #{$first}):nth-child(-n + #{$last})',
+      required-vars: first last
+    ),
+    odd-between: (
+      query-string: 'nth-child(odd):nth-child(n + #{$first}):nth-child(-n + #{$last})',
+      required-vars: first last
+    ),
+    n-between: (
+      query-string: 'nth-child(#{$number}n):nth-child(n + #{$first}):nth-child(-n + #{$last})',
+      required-vars: number first last
+    ),
+    all-but: (
+      query-string: 'not(:nth-child(#{$number}))',
+      required-vars: number
+    ),
+    each: (
+      query-string: 'nth-child(#{$number}n)',
+      required-vars: number
+    ),
+    every: (
+      query-string: 'nth-child(#{$number}n)',
+      required-vars: number
+    ),
+    from-first-last: (
+      query-string: 'nth-child(#{$number})' 'nth-last-child(#{$number})',
+      required-vars: number
+    ),
+    middle: (
+      query-string: 'nth-child(#{round($number / 2)})',
+      required-vars: number
+    ),
+    all-but-first-last: (
+      query-string: 'nth-child(n + #{$number}):nth-last-child(n + #{$number})',
+      required-vars: number
+    ),
+    first-of: (
+      query-string: 'nth-last-child(#{$limit}):first-child',
+      required-vars: limit
+    ),
+    last-of: (
+      query-string: 'nth-of-type(#{$limit}):nth-last-of-type(1)',
+      required-vars: limit
+    ),
+    at-least: (
+      query-string: 'nth-last-child(n + #{$number})' 'nth-last-child(n + #{$number}) ~ #{nth(nth($selector, -1), -1)}',
+      required-vars: number,
+    ),
+    at-most: (
+      query-string: 'nth-last-child(-n + #{$number}):first-child' 'nth-last-child(-n + #{$number}):first-child ~ #{nth(nth($selector, -1), -1)}',
+      required-vars: number,
+    ),
+    in-between: (
+      query-string: 'nth-last-child(n + #{$min}):nth-last-child(-n + #{$max}):first-child' 'nth-last-child(n + #{$min}):nth-last-child(-n + #{$max}):first-child ~ #{nth(nth($selector, -1), -1)}',
+      required-vars: min max,
+    ),
+    first-child: (
+      query-string: 'first-of-type',
+      required-vars: type
+    ),
+    last-child: (
+      query-string: 'last-of-type',
+      required-vars: type
+    ),
+    even: (
+      query-string: 'nth-child(even)',
+      required-vars: type
+    ),
+    odd: (
+      query-string: 'nth-child(odd)',
+      required-vars: type
+    ),
+    last-first: (
+      query-string: 'first-child' 'last-child',
+      required-vars: type
+    ),
+    unique: (
+      query-string: 'only-child',
+      required-vars: type
+    ),
+    only: (
+      query-string: 'only-child',
+      required-vars: type
+    ),
+    not-unique: (
+      query-string: 'not(:only-child)',
+      required-vars: type
+    )
+  ) !global;
+
+  // A small helper to list all avalible quieries
+  // Usage: @include child(help);
+  @if $type == help {
+    $keys: map-keys($types);
+    @each $key in $keys {
+      @debug 'Avalible Type: `#{$key}`';
+    }
+  }
+
+  // Checks that the key exit, if it does returns the map associated with that key
+  $query-map: validate-key($type, $types);
+
+  // Checks that the required vars were set within mixin, if they are not set return false with a error telling user what value need to be set -> returns true or false
+  $query-valid: validate-child-query($config-args, $query-map);
+
+  // Sets blank var to be passed through while loop
+  $final: ();
+
+  @if $query-valid == true {
+    // Gets list of strings
+    $query-string: map-get($query-map, query-string);
+    // Gets the length of the list
+    $length-value: length($query-string);
+    $count: 1;
+    // Loops through the list adds required commas and selectors
+    @while $count <= $length-value {
+      $string: nth($query-string, $count);
+      $combine: unquote($selector + ':' + $string);
+      $final: append($final, $combine, comma);
+      $count: $count + 1;
+    }
+
+    // Exports final string to be complied with content
+    #{$final} {
+      @content;
+    }
+  } @else {
+    // If it does not pass the valid query check throw error with message
+    $missing-required: nth($query-valid, 2);
+    @error 'Value is missing for `#{$missing-required}`';
+  }
+}

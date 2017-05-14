@@ -1,0 +1,73 @@
+/// @name Lists
+/// Creates basic list classes
+/// @outputs base ul li styles with some basic list classes
+
+
+@mixin infra-lists() {
+  // Lists 
+
+  ul,
+  ol {
+    margin: 0 0 1.5em 3em;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  li > ul,
+  li > ol {
+    margin-bottom: 0;
+    margin-left: 1.5em;
+  }
+
+  .list-inline {
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      list-style-type: none;
+    }
+  }
+
+  .list-justify {
+    margin: 0;
+    padding: 0;
+
+    @include flex-display();
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+
+    li {
+      list-style-type: none;
+      text-align: center;
+      flex-grow: 1;
+    }
+  }
+
+  .list-plain {
+    li {
+      list-style-type: none;
+    }
+  }
+
+
+  .list-group {
+    margin: 0;
+    padding: 0;
+
+    .list-item {
+      position: relative;
+      display: block;
+      margin-bottom: -1px;
+      padding: 15px 20px;
+      border: 1px solid darken(color(greyscale, light-grey), 10%);
+      background-color: color(greyscale, white); // sass-lint:disable-line no-color-keywords
+    }
+  }
+}

@@ -1,0 +1,82 @@
+$keyframes-fading-exits: (
+  fadeOutDown: (
+    '0%': (
+      opacity: 1,
+      transform: 'translateY(0)'
+    ),
+    '100%': (
+      opacity: 0,
+      transform: 'translateY(20px)'
+    )
+  ),
+  fadeOutDownBig: (
+    '0%': (
+      opacity: 1,
+      transform: 'translateY(0)'
+    ),
+    '100%': (
+      opacity: 0,
+      transform: 'translateY(2000px)'
+    )
+  ),
+  fadeOutLeft: (
+    '0%': (
+      opacity: 1,
+      transform: 'translateX(0)'
+    ),
+    '100%': (
+      opacity: 0,
+      transform: 'translateX(-20px)'
+    )
+  ),
+  fadeOutLeftBig: (
+    '0%': (
+      opacity: 1,
+      transform: 'translateX(0)'
+    ),
+    '100%': (
+      opacity: 0,
+      transform: 'translateX(-2000px)'
+    )
+  ),
+  fadeOutRight: (
+    '0%': (
+      opacity: 1,
+      transform: 'translateX(0)'
+    ),
+    '100%': (
+      opacity: 0,
+      transform: 'translateX(20px)'
+    )
+  ),
+  fadeOutRightBig: (
+    '0%': (
+      opacity: 1,
+      transform: 'translateX(0)'
+    ),
+    '100%': (
+      opacity: 0,
+      transform: 'translateX(2000px)'
+    )
+  ),
+  fadeOutUp: (
+    '0%': (
+      opacity: 1,
+      transform: 'translateY(0)'
+    ),
+    '100%': (
+      opacity: 0,
+      transform: 'translateY(-20px)'
+    )
+  ),
+  fadeOutUpBig: (
+    '0%': (
+      opacity: 1,
+      transform: 'translateY(0)'
+    ),
+    '100%': (
+      opacity: 0,
+      transform: 'translateY(-2000px)'
+    )
+  ),
+);

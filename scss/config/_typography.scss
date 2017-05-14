@@ -1,0 +1,86 @@
+/// @name Typography Options
+/// @group strawstyl-config
+/// @access private
+/// @type Map
+
+$typography: (
+  typography: (
+    // Default Sizes
+    default-font-size: 16px,
+    default-line-height: 16px,
+    baseline: 24px,
+    fonts: (
+      // Main Fonts For Page
+      heading: '\'Source Sans Pro\', sans-serif',
+      primary: '\'Source Sans Pro\', sans-serif',
+      brand: '\'Source Sans Pro\', sans-serif',
+      awesome: '\'FontAwesome\', sans-serif'
+    ),
+    heading: (
+      h1: (
+        level: 1,
+        font-size: 48px,
+        line-height: 52px,
+        weight: 700,
+        transform: initial
+      ),
+      h2: (
+        level: 2,
+        font-size: 42px,
+        line-height: 46px,
+        weight: 700,
+        transform: initial
+      ),
+      h3: (
+        level: 3,
+        font-size: 36px,
+        line-height: 40px,
+        weight: 700,
+        transform: initial
+      ),
+      h4: (
+        level: 4,
+        font-size: 30px,
+        line-height: 34px,
+        weight: 700,
+        transform: initial
+      ),
+      h5: (
+        level: 5,
+        font-size: 24px,
+        line-height: 28px,
+        weight: 700,
+        transform: initial
+      ),
+      h6: (
+        level: 6,
+        font-size: 18px,
+        line-height: 22px,
+        weight: 700,
+        transform: initial
+      ),
+      p: (
+        level: auto,
+        font-size: 16px,
+        line-height: 20px,
+        weight: 400,
+        transform: initial
+      ),
+      default: (
+        level: auto,
+        font-size: $base-font-size,
+        line-height: ($base-font-size + 4px),
+        weight: 400,
+        transform: initial
+      )
+    ),
+    link: (
+      link-decoration: none,
+      text-transform: initial
+    )
+  )
+);
+
+//Default hr styles
+$hr-background: color(brand, primary) !default;
+$hr-height: 1px !default;

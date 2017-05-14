@@ -1,0 +1,122 @@
+////
+/// Helpers
+/// @group tools
+////
+
+/// @name Prefix Utility
+/// @param $property - CSS property
+/// @param $experssion - The expressions for the CSS property
+/// @param $usage - Defines where the perfix will be placed - More cases can be created if required
+/// @param $prefix - Defines the prefix map that generates the proper prefixs
+/// @outputs required prefixed styles
+
+@mixin prefix($property, $expression, $usage: property, $prefix: get('prefix')) {
+  @if $usage == property {
+    @each $key, $browser-prefix in $prefix {
+      #{$browser-prefix}#{$property}: unquote(#{$expression});
+    }
+  } @else if $usage == expression {
+    @each $key, $browser-prefix in $prefix {
+      #{$property}: $browser-prefix + unquote(#{$expression});
+    }
+  } @else {
+    @error '`#{$usage}` is not a proper placement for the prefix';
+  }
+  #{$property}: unquote(#{$expression});
+}
+
+/// @name Cross Browser Opacity
+/// Ensures older ie is supported
+/// @param {intiger} $opacity
+/// @outputs opacity properties
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity = $opacity-ie);
+}
+
+/// @name Generates Calc Kits
+/// Generates the calc function
+/// @param {intiger} $property - The css property ie width or height
+/// @param {intiger} $default - fallback value if calc is not supported
+/// @param {string} $expression - the calc expression
+/// @param {string} $important - add `important` to make calc important
+/// @outputs calc properties
+/// @example
+//    @include calc(width, 98%, "100% - 50px");
+
+@mixin calc($property, $default, $expression, $important: null) {
+  #{$property}: $default $important;
+  #{$property}: -webkit-calc(#{$expression}) $important;
+  #{$property}: -moz-calc(#{$expression}) $important;
+  #{$property}: calc(#{$expression}) $important;
+}
+
+/// @name Filter Prefix
+/// @param {property} $args - A string of properties
+/// @outputs filter properties
+
+@mixin filter($args) {
+  @include prefix(filter, $args);
+}
+
+/// @name White Space Prefix
+/// @param {property} $args - A string of properties
+/// @outputs White-space properties
+
+@mixin white-space($args) {
+  @include prefix(white-space, $args);
+}
+
+/// @name Placeholder Text Styler
+/// @content Properties for placeholder on an input
+/// @outputs Placeholder prefixed
+
+@mixin input-placeholder {
+  &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &:-ms-input-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+}
+
+/// @name Z-index Handler
+/// z-index levels created by $z-index-level var within active
+/// @param {key} $arg - reference to $z-index-level
+/// @outputs Placeholder prefixed
+/// @see $z-index-level
+
+@mixin z-index($arg, $important: null) {
+  $z-index-level: get('z-index');
+  @if map-has-key($z-index-level, $arg) {
+    z-index: map-get($z-index-level, $arg) $important;
+  } @else {
+    @error '#{$arg} is not a z-index level';
+  }
+}
+
+/// @name Appearance Prefix
+/// @param {property} $args - A string of properties
+/// @outputs appearance properties
+
+@mixin appearance($args) {
+  @include prefix(appearance, $args);
+}
+
+/// @name Visibility Prefix
+/// @param {property} $args - A string of properties
+/// @outputs appearance properties
+
+@mixin visibility($args: hidden) {
+  @include prefix(backface-visibility, $args);
+}
+
+/// @name Create Css Properties from a map
+/// @param {Map} $map-of-properties - key is the propety, value is the property value
+/// @outputs properties
+@mixin create-properties($map-of-properties) {
+  @each $key, $value in $map-of-properties {
+    #{$key}: #{$value};
+  }
+}

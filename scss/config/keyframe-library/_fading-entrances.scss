@@ -1,0 +1,90 @@
+$keyframes-fading-entrances: (
+  fadeIn: (
+    '0%': (
+      opacity: 0
+    ),
+    '100%': (
+      opacity: 1
+    )
+  ),
+  fadeInDown: (
+    '0%': (
+      opacity: 0,
+      transform: 'translateY(-20px)'
+    ),
+    '100%': (
+      opacity: 1,
+      transform: 'translateY(0)'
+    )
+  ),
+  fadeInDownBig: (
+    '0%': (
+      opacity: 0,
+      transform: 'translateY(-2000px)'
+    ),
+    '100%': (
+      opacity: 1,
+      transform: 'translateY(0)'
+    )
+  ),
+  fadeInLeft: (
+    '0%': (
+      opacity: 0,
+      transform: 'translateX(-20px)'
+    ),
+    '100%': (
+      opacity: 1,
+      transform: 'translateX(0)'
+    )
+  ),
+  fadeInLeftBig: (
+    '0%': (
+      opacity: 0,
+      transform: 'translateX(-2000px)'
+    ),
+    '100%': (
+      opacity: 1,
+      transform: 'translateX(0)'
+    )
+  ),
+  fadeInRight: (
+    '0%': (
+      opacity: 0,
+      transform: 'translateX(20px)'
+    ),
+    '100%': (
+      opacity: 1,
+      transform: 'translateX(0)'
+    )
+  ),
+  fadeInRightBig: (
+    '0%': (
+      opacity: 0,
+      transform: 'translateX(2000px)'
+    ),
+    '100%': (
+      opacity: 1,
+      transform: 'translateX(0)'
+    )
+  ),
+  fadeInUp: (
+    '0%': (
+      opacity: 0,
+      transform: 'translateY(20px)'
+    ),
+    '100%': (
+      opacity: 1,
+      transform: 'translateY(0)'
+    )
+  ),
+  fadeInUpBig: (
+    '0%': (
+      opacity: 0,
+      transform: 'translateY(2000px)'
+    ),
+    '100%': (
+      opacity: 1,
+      transform: 'translateY(0)'
+    )
+  )
+);

@@ -1,0 +1,95 @@
+
+@include normalize();
+
+body {
+  color: color(greyscale, dark-grey);
+  background-color: color(greyscale, light-grey);
+  font-family: font-family(primary);
+  line-height: heading(default, line-height);
+
+  @include font-size(heading(default, font-size));
+}
+
+hr {
+  margin: 20px 0;
+  border: 0;
+  border-top: 1px solid color(greyscale, light-grey);
+}
+
+// Images 
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// Helpers
+.transition {
+  @include transition(all 0.3s ease);
+}
+
+.faded {
+  @include opacity(0.8);
+}
+
+.center,
+.center-block {
+  display: block;
+  margin: 0 auto;
+}
+
+// Resets all styles on a button
+.clear-button {
+  text-rendering: auto;
+  color: inherit;
+  font-size: inherit;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0;
+  text-shadow: none;
+  display: inline-block;
+  text-align: inherit;
+  margin: 0;
+  padding: 0;
+  background: none;
+  outline: 0;
+  border: 0;
+  border-radius: 0;
+  font-weight: inherit;
+  cursor: pointer;
+  width: inherit;
+  font-family: inherit;
+}
+
+// Createing classes
+@if infra-value(text) != false {
+  @include infra-text();
+}
+
+@if infra-value(lists) != false {
+  @include infra-lists();
+}
+
+@if infra-value(headings) != false {
+  @include infra-headings();
+}
+
+@if infra-value(position) != false {
+  @include infra-position();
+}
+
+// Vars for setup of grid system 
+$col-size: map-keys(get('grid, setup, breakpoints')) !default;
+$grid-columns: get('grid, grid-columns');
+
+@include flexbox-grid($col-size, $grid-columns);
+
+// Checks to see if you want to import
+@if infra-value(box-modal) != false {
+  @include infra-box-modal(infra-value(box-modal), infra-value(box-modal-values));
+}
+
+@if infra-value(display) != false {
+  @include infra-display(infra-value(display));
+}

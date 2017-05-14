@@ -1,0 +1,75 @@
+
+/// @name Infrastructure display
+/// @param {key} $generate [default] - A key that defines what classes will be created
+/// @param {list} $display-breakpoints [xs, sm, md, lg, xl] - A list of breakpoints to create classes
+/// @outputs Display classes
+
+@mixin infra-display($generate: default, $display-breakpoints: map-keys(get('grid, setup, breakpoints'))) {
+  @if $generate == help {
+    @include INFO('Order: \A generate: avalible keys -> default, breakpoint, general: very minimal classes \A display-breakpoints: breakpoints set within framework'); // sass-lint:disable-line mixin-name-format
+  }
+
+  // Checks to see what needs generated
+  @if $generate == default or
+      $generate == breakpoint {
+
+    // Responsive hidden/visible
+    // ==================================
+    @for $i from 1 through length($display-breakpoints) {
+      @if $i == 1 {
+        .hidden-#{nth($display-breakpoints, $i)} {
+          @include breakpoint(xs) {
+            display: none !important;
+          }
+        }
+
+        .visible-#{nth($display-breakpoints, $i)} {
+          @include breakpoint(xs) {
+            display: block !important;
+          }
+        }
+      } @else {
+        .hidden-#{nth($display-breakpoints, $i)} {
+          @include breakpoint(nth($display-breakpoints, $i)) {
+            display: none !important;
+          }
+        }
+
+        .visible-#{nth($display-breakpoints, $i)} {
+          @include breakpoint(nth($display-breakpoints, $i)) {
+            display: block !important;
+          }
+        }
+      }
+    }
+  }
+
+  // Checks to see what needs generated
+  @if $generate == default or
+      $generate == general or
+      $generate == breakpoints {
+
+    // Showing/Hiding content
+    // ==================================
+
+    .show {
+      display: block !important;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .invisible {
+      visibility: hidden;
+    }
+
+    .text-hide {
+      color: transparent;
+      border: 0;
+      background-color: transparent;
+      text-shadow: none;
+      font: 0/0 a;
+    }
+  }
+}

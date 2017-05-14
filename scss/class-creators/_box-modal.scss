@@ -1,0 +1,82 @@
+
+/// @name Infrastructure Box Modal
+/// Creates the box modal classes
+/// @param {key} $generate [default] - A key that defines what classes will be created
+/// @param {list} $values [15] - A list of intigers that will create the class increments
+/// @outputs box-modal classes
+
+@mixin infra-box-modal($generate: default, $values: 15) {
+  $sides: (top, right, left, bottom);
+  $if-breakpoint: index($generate, breakpoint);
+  $breakpoint-levels: map-keys($breakpoints);
+  // Help function
+  @if $generate == help {
+    @include INFO('Available options: \A default -> creates margin and padding classes. \A margin -> Creates margin classes. padding -> Creates padding classes. \A breakpoint -> Adding activates breakpoint classes, use in conjunction with other options. \A  Second value accepts a list of intigers that would be used as the properties value.');
+  }
+
+  @if $generate == default or default breakpoint {
+    $generate: mar, pad;
+  } @else if $generate == padding or padding breakpoint {
+    $generate: pad;
+  } @else if $generate == margin or margin breakpoint {
+      $generate: mar;
+  } @else {
+    @error 'This is not built into the box modal';
+  }
+
+  .no-padding,
+  .no-pad {
+    padding: 0 !important;
+  }
+
+  .no-margin,
+  .no-mar {
+    margin: 0 !important;
+  }
+
+  //@if $generate == default or $generate == padding {
+  @each $box-modal in $generate {
+    $property: ();
+    @if $box-modal == mar {
+      $property: margin;
+    } @else {
+      $property: padding;
+    }
+
+    @each $value in $values {
+      .#{$box-modal}-#{$value} {
+        #{$property}: $value + px;
+      }
+
+      @if $if-breakpoint {
+        @each $breakpoint in $breakpoint-levels {
+        .#{$box-modal}-#{$value}-#{$breakpoint} {
+            @include breakpoint($breakpoint) {
+              #{$property}: $value + px;
+            }
+          }
+        }
+      }
+
+      @each $current-side in $sides {
+
+        .no-#{$box-modal}-#{$current-side} {
+            #{$property}-#{$current-side}: 0 !important;
+        }
+
+        .#{$box-modal}-#{$value}-#{$current-side} {
+            #{$property}-#{$current-side}: $value + px;
+        }
+        @if $if-breakpoint {
+          @each $breakpoint in $breakpoint-levels {
+          .#{$box-modal}-#{$value}-#{$current-side}-#{$breakpoint} {
+              @include breakpoint($breakpoint) {
+                #{$property}-#{$current-side}: $value + px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

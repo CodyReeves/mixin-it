@@ -1,0 +1,62 @@
+ $keyframes-zooming-exits: (
+  zoomOut: (
+    '0%': (
+      opacity: 1
+    ),
+    '50%': (
+      opacity: 0,
+      tranfrom: 'scale3d(.3, .3, .3)',
+    ),
+    '100%': (
+      opacity: 0
+    )
+  ),
+  zoomOutDown: (
+    '40%': (
+      animation-timing-function: 'cubic-bezier(0.550, 0.055, 0.675, 0.190)',
+      opacity: 1,
+      transform: 'scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0)'
+    ),
+    '100%': (
+      animation-timing-function: 'cubic-bezier(0.175, 0.885, 0.320, 1)',
+      opacity: 0,
+      transform: 'scale3d(0.1, 0.1, 0.1) translate3d(0, 2000px, 0)',
+      transform-origin: 'center bottom'
+    )
+  ),
+  zoomOutLeft: (
+    '40%': (
+      opacity: 1,
+      transform: 'scale3d(0.475, 0.475, 0.475) translate3d(42px, 0, 0)'
+    ),
+    '100%': (
+      opacity: 0,
+      transform: 'scale(0.1) translate3d(-2000px, 0, 0)',
+      transform-origin: 'left center'
+    )
+  ),
+  zoomOutRight: (
+    '40%': (
+      opacity: 1,
+      transform: 'scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0)'
+    ),
+    '100%': (
+      opacity: 0,
+      transform: 'scale(0.1) translate3d(2000px, 0, 0)',
+      transform-origin: 'right center'
+    )
+  ),
+  zoomOutUp: (
+    '40%': (
+      animation-timing-function: 'cubic-bezier(0.550, 0.055, 0.675, 0.190)',
+      opacity: 1,
+      transform: 'scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0)'
+    ),
+    '100%': (
+      animation-timing-function: 'cubic-bezier(0.175, 0.885, 0.320, 1)',
+      opacity: 0,
+      transform: 'scale3d(0.1, 0.1, 0.1) translate3d(0, -2000px, 0)',
+      transform-origin: 'center bottom'
+    )
+  )
+ );

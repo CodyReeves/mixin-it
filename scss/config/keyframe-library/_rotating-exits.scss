@@ -1,0 +1,62 @@
+$keyframes-rotating-exits: (
+  rotateOut: (
+    '0%': (
+      opacity: 1,
+      transform: 'rotate(0deg)',
+      transform-origin: 'center center'
+    ),
+    '100%': (
+      opacity: 0,
+      transform: 'rotate(200deg)',
+      transform-origin: 'center center'
+    )
+  ),
+  rotateOutDownLeft: (
+    '0%': (
+      opacity: 1,
+      transform: 'rotate(0deg)',
+      transform-origin: 'left bottom'
+    ),
+    '100%': (
+      opacity: 1,
+      transform: 'rotate(90deg)',
+      transform-origin: 'left bottom'
+    )
+  ),
+  rotateOutDownRight: (
+    '0%': (
+      opacity: 1,
+      transform: 'rotate(0deg)',
+      transform-origin: 'right bottom'
+    ),
+    '100%': (
+      opacity: 0,
+      transform: 'rotate(-90deg)',
+      transform-origin: 'right bottom'
+    )
+  ),
+  rotateOutUpLeft: (
+    '0%': (
+      opacity: 1,
+      transform: 'rotate(0deg)',
+      transform-origin: 'left bottom'
+    ),
+    '100%': (
+      opacity: 0,
+      transform: 'rotate(-90deg)',
+      transform-origin: 'left bottom'
+    )
+  ),
+  rotateOutUpRight: (
+    '0%': (
+      opacity: 0,
+      transform: 'rotate(0deg)',
+      transform-origin: 'right bottom'
+    ),
+    '100%': (
+      opacity: 1,
+      transform: 'rotate(90deg)',
+      transform-origin: 'right bottom'
+    )
+  )
+);

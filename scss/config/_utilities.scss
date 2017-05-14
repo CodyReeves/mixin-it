@@ -1,0 +1,52 @@
+// Grid Variables
+// ==========================================================================
+
+/// @name Grid Options
+/// @group strawstyl-config
+/// @access private
+/// @type Map
+
+$grid: (
+  grid: (
+    ie-fallback: true,
+    grid-columns: 12,
+    masonry-import: true,
+    mas-item-padding: 5px,
+    mas-column-gap: 15px,
+    setup: (
+      breakpoints: (
+        xs: 768px,
+        sm: 768px,
+        md: 992px,
+        lg: 1280px,
+        xl: 1600px,
+        xxl: 1900px
+      )
+    )
+  )
+) !default;
+
+// Prefix's for css
+// ==========================================================================
+
+/// @name Utility Options
+/// @group strawstyl-config
+/// @access private
+/// @type Map
+
+$utilities: (
+  prefix: (
+    1: '-webkit-',
+    2: '-moz-',
+    3: '-ms-',
+    4: '-o-'
+  ),
+  z-index: (
+    1: 1,
+    2: 10,
+    3: 100,
+    4: 500,
+    5: 1000,
+    6: 10000
+  )
+) !default;

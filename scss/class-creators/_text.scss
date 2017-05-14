@@ -1,0 +1,35 @@
+@mixin infra-text() {
+  // Text Transform
+  // ==================================
+
+  .text-upper {
+    text-transform: uppercase;
+  }
+
+  .text-lower {
+    text-transform: lowercase;
+  }
+
+  .text-capitalize {
+    text-transform: capitalize;
+  }
+
+  // Text Alignments
+  // ==================================
+
+  .text-center {
+    text-align: center;
+  }
+
+  .text-left {
+    text-align: left;
+  }
+
+  .text-right {
+    text-align: right;
+  }
+
+  .text-justify {
+    text-align: justify;
+  }
+}

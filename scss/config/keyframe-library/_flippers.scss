@@ -1,0 +1,79 @@
+$keyframes-flippers: (
+  flip: (
+    dependancy: (
+      transform-style: preserve-3d
+    ),
+    '0%': (
+      transform: 'perspective(400px) translateZ(150px) rotateY(170deg)',
+      animation-timing-function: ease-out
+    ),
+    '40%': (
+      transform: 'perspective(400px) translateZ(150px) rotateY(170deg)',
+      animation-timing-function: ease-out
+    ),
+    '50%': (
+      transform: 'perspective(400px) translateZ(150px) rotateY(190deg) scale(1)',
+      animation-timing-function: ease-in
+    ),
+    '80%': (
+      transform: 'perspective(400px) rotateY(360deg) scale(.95)',
+      animation-timing-function: ease-in
+    ),
+    '100%': (
+      transform: 'perspective(400px) scale(1)',
+      animation-timing-function: ease-in
+    )
+  ),
+  flipInX: (
+    '0%': (
+      opacity: 0,
+      transform: 'perspective(400px) rotateX(90deg)'
+    ),
+    '40%': (
+      transform: 'perspective(400px) rotateX(-10deg)'
+    ),
+    '70%': (
+      transform: 'perspective(400px) rotateX(10deg)'
+    ),
+    '100%': (
+      opacity: 1,
+      transform: 'perspective(400px) rotateX(0deg)'
+    )
+  ),
+  flipInY: (
+    '0%': (
+      opacity: 0,
+      transform: 'perspective(400px) rotateY(90deg)'
+    ),
+    '40%': (
+      transform: 'perspective(400px) rotateY(-10deg)'
+    ),
+    '70%': (
+      transform: 'perspective(400px) rotateY(10deg)'
+    ),
+    '100%': (
+      opacity: 1,
+      transform: 'perspective(400px) rotateY(0deg)'
+    )
+  ),
+  flipOutX: (
+    '0%': (
+      opacity: 1,
+      transform: 'perspective(400px) rotateX(0deg)'
+    ),
+    '100%': (
+      opacity: 0,
+      transform: 'perspective(400px) rotateX(90deg)'
+    )
+  ),
+  flipOutY: (
+    '0%': (
+      opacity: 1,
+      transform: 'perspective(400px) rotateY(0deg)'
+    ),
+    '100%': (
+      opacity: 0,
+      transform: 'perspective(400px) rotateY(90deg)'
+    )
+  )
+);

@@ -1,0 +1,85 @@
+// Animate
+// ==========================================================================
+
+/// @name Animation Settings
+/// @group strawstyl-config
+/// @access private
+/// @type Map
+
+$animate: (
+  animate: (
+    create-keyframes: false,
+    create-animation-library: false,
+    count-default: 1,
+    duration-default: 1s,
+    delay-default: 0s,
+    function-default: ease,
+    fill-default: both,
+    visibility-default: false,
+    play-state-default: initial,
+    direction-default: unset,
+    import: (
+      attention-seekers-animate: (
+        active: true,
+        animations: (jello, bounce, flash, pulse, rubber-band, shake, swing, tada, wobble)
+      ),
+      bouncing-entrances-animate: (
+        active: true,
+        animations: (bounceIn, bounceInDown, bounceInLeft, bounceInRight, bounceInUp)
+      ),
+      bouncing-exits-animate:  (
+        active: true,
+        animations: (bounceOut, bounceOutDown, bounceOutLeft, bounceOutRight, bounceOutUp)
+      ),
+      fading-entrances-animate:  (
+        active: true,
+        animations: (fadeIn, fadeInDown, fadeInDownBig, fadeInLeft, fadeInLeftBig, fadeInRight, fadeInRightBig, fadeInUp, fadeInUpBig)
+      ),
+      fading-exits-animate:  (
+        active: true,
+        animations: (fadeOutDown, fadeOutDownBig, fadeOutLeft, fadeOutLeftBig, fadeOutRight, fadeOutRightBig, fadeOutUp, fadeOutUpBig)
+      ),
+      flippers-animate:  (
+        active: true,
+        animations: (flip, flipInX, flipInY, flipOutX, flipOutY)
+      ),
+      lightspeed-animate:  (
+        active: true,
+        animations: (lightSpeedIn, lightSpeedOut)
+      ),
+      rotating-entrances-animate:  (
+        active: true,
+        animations: (rotateIn, rotateInDownLeft, rotateInDownRight, rotateInUpLeft, rotateInUpRight)
+      ),
+      rotating-exits-animate:  (
+        active: true,
+        animations: (rotateOut, rotateOutDownLeft, rotateOutDownRight, rotateOutUpLeft, rotateOutUpRight)
+      ),
+      sliding-entrances-animate:  (
+        active: true,
+        animations: (slideInDown, slideInLeft, slideInRight, slideInUp)
+      ),
+      sliding-exits-animate:  (
+        active: true,
+        animations: (slideOutDown, slideOutLeft, slideOutRight, slideOutUp)
+      ),
+      specials-animate:  (
+        active: true,
+        animations: (hinge, rollIn, rollOut)
+      ),
+      zooming-entrances-animate:  (
+        active: true,
+        animations: (zoomIn, zoomInDown, zoomInLeft, zoomInRight)
+      ),
+      zooming-exits-animate:  (
+        active: true,
+        animations: (zoomOut, zoomOutDown, zoomOutLeft, zoomOutRight, zoomOutUp)
+      ),
+    )
+  )
+) !default;
+
+// Custom Keyframes
+// ==========================================================================
+
+$keyframes-custom: () !default;

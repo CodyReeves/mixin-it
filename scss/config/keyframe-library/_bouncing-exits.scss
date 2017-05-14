@@ -1,0 +1,64 @@
+$keyframes-bouncing-exits: (
+  bounceOut: (
+    '0%': (
+      transform: 'scale(1)'
+    ),
+    '25%': (
+      transform: 'scale(0.95)'
+    ),
+    '50%': (
+      transform: 'scale(1.1)'
+    ),
+    '100%': (
+      transform: 'scale(0.3)'
+    )
+  ),
+  bounceOutDown: (
+    '0%': (
+      transform: 'translateY(0)'
+    ),
+    '20%': (
+      opacity: 1,
+      transform: 'translateY(-20px)'
+    ),
+    '100%': (
+      transform: 'translateY(2000px)'
+    )
+  ),
+  bounceOutLeft: (
+    '0%': (
+      transform: 'translateX(0)'
+    ),
+    '20%': (
+      opacity: 1,
+      transform: 'translateX(20px)'
+    ),
+    '100%': (
+      transform: 'translateX(-2000px)'
+    )
+  ),
+  bounceOutRight: (
+    '0%': (
+      transform: 'translateX(0)'
+    ),
+    '20%': (
+      opacity: 1,
+      transform: 'translateX(-20px)'
+    ),
+    '100%': (
+      transform: 'translateX(2000px)'
+    )
+  ),
+  bounceOutUp: (
+    '0%': (
+      transform: 'translateY(0)'
+    ),
+    '20%': (
+      opacity: 1,
+      transform: 'translateY(20px)'
+    ),
+    '100%': (
+      transform: 'translateY(-2000px)'
+    )
+  )
+);

@@ -1,0 +1,50 @@
+// sass-lint:disable no-color-keywords, hex-length
+// Colors
+// ==========================================================================
+
+/// @name Color Options
+/// @group strawstyl-config
+/// @access private
+/// @type Map
+
+$colors: (
+  colors: (
+    brand: (
+      primary: #3a4044,
+      secondary: #5e5e5e,
+      support: #0275d8,
+      default: #5bc0de,
+      success:  #5cb85c,
+      warning: #f0ad4e,
+      info: #e86800,
+      danger: #e50000
+    ),
+    cta: (
+      cta-1: #f00,
+      cta-2: #008000,
+      cta-3: #00f
+    ),
+    greyscale: (
+      'white': #fff,
+      light-grey: #f7f7f7,
+      'grey': #bdbdbd,
+      dark-grey: #303030,
+      'black': #141414
+    ),
+    link: (
+      link: #e86800,
+      link-secondary: darken(#e86800, 15%),
+    ),
+    social: (
+      facebook: #3b5998,
+      twitter: #55acee,
+      google: #dd4b39,
+      youtube: #b00,
+      pinterest: #cb2027,
+      vimeo: #aad450,
+      tumblr: #32506d,
+      rss: #f60,
+      instagram: #125688
+    ),
+  )
+);
